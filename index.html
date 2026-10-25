@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Justin Julian C. Nayosan | IT Student Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b0e13;--card:rgba(255,255,255,.055);--line:rgba(255,255,255,.12);--tx:#eef0f6;--mu:#9aa1b5;--a:#ffb454;--b:#ff6b6b;--c:#5eead4;--g:linear-gradient(120deg,var(--a),var(--b))}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-height:1.65;display:grid;grid-template-columns:310px 1fr;min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--c);outline-offset:3px}
+
+/* animated background */
+.bg{position:fixed;inset:0;z-index:-2;overflow:hidden}
+.bg i{position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;animation:mv 20s ease-in-out infinite alternate}
+.bg i:nth-child(1){width:50vmax;height:50vmax;background:#ff6b6b;top:-20%;right:-10%}
+.bg i:nth-child(2){width:45vmax;height:45vmax;background:#ffb454;bottom:-25%;left:10%;animation-duration:27s;opacity:.22}
+.bg i:nth-child(3){width:35vmax;height:35vmax;background:#5eead4;top:30%;left:35%;animation-duration:33s;opacity:.14}
+.bg::after{content:"";position:absolute;inset:-64px;background-image:radial-gradient(rgba(255,255,255,.22) 1.2px,transparent 1.4px);background-size:32px 32px;animation:dots 14s linear infinite;-webkit-mask-image:radial-gradient(circle at 60% 20%,#000,transparent 75%);mask-image:radial-gradient(circle at 60% 20%,#000,transparent 75%)}
+@keyframes mv{to{transform:translate(-8vmax,7vmax) scale(1.2)}}
+@keyframes dots{to{transform:translate(32px,32px)}}
+.spot{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(420px circle at var(--x,50%) var(--y,30%),rgba(255,180,84,.13),transparent 70%)}
+
+/* sidebar */
+aside{position:sticky;top:0;height:100vh;padding:34px 26px;display:flex;flex-direction:column;gap:18px;border-right:1px solid var(--line);background:rgba(11,14,19,.55);backdrop-filter:blur(16px)}
+.pfp{width:150px;aspect-ratio:1;border-radius:34px;padding:4px;background:conic-gradient(from 0deg,var(--a),var(--b),var(--c),var(--a));animation:spin 9s linear infinite}
+.pfp img{width:100%;height:100%;object-fit:cover;border-radius:30px;display:block;animation:spin 9s linear infinite reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+aside h1{font-family:Syne,sans-serif;font-size:1.6rem;line-height:1.15}
+.role{color:var(--a);font-size:.95rem}
+.mini{font-size:.88rem;color:var(--mu);display:grid;gap:4px}.mini a:hover{color:var(--c)}
+aside nav{display:grid;gap:2px;margin-top:4px}
+aside nav a{padding:8px 12px;border-radius:10px;color:var(--mu);font-size:.95rem;transition:.2s}
+aside nav a:hover,aside nav a.on{background:var(--card);color:var(--tx);padding-left:18px}
+.btn{display:inline-block;text-align:center;padding:12px 20px;border-radius:12px;font-weight:700;background:var(--g);color:#1a0d05;margin-top:auto;transition:.25s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 30px -10px var(--b)}
+
+/* content */
+main{padding:70px 5vw;max-width:1100px;width:100%}
+section{margin-bottom:96px}
+h2{font-family:Syne,sans-serif;font-size:clamp(1.9rem,4vw,2.7rem);margin-bottom:8px}
+h2 b{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--mu);margin-bottom:28px;max-width:60ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:26px;backdrop-filter:blur(10px)}
+.two{display:grid;grid-template-columns:1.3fr 1fr;gap:20px}
+.hero h1{font-family:Syne,sans-serif;font-size:clamp(2.6rem,7vw,5rem);line-height:1.02;margin-bottom:16px}
+.hero h1 span{background:var(--g);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--mu);max-width:56ch;font-size:1.1rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chips em{font-style:normal;font-size:.86rem;padding:6px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--c)}
+ul.l{list-style:none;display:grid;gap:10px}
+ul.l li::before{content:"";display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--a);margin-right:12px;transform:rotate(45deg)}
+.proj{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.proj .card{transition:.3s}.proj .card:hover{transform:translateY(-8px);border-color:var(--a)}
+.proj h3{font-family:Syne,sans-serif;color:var(--a);margin-bottom:8px}
+.proj p{color:var(--mu)}
+
+/* certificates (horizontal) */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tabs button,.arr button{font:inherit;cursor:pointer;color:var(--tx);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 18px;transition:.2s}
+.tabs button.on,.tabs button:hover,.arr button:hover{background:var(--g);color:#1a0d05;border-color:transparent}
+.arr{display:flex;gap:8px;margin-bottom:6px}.arr button{width:44px;height:44px;padding:0;font-size:1.2rem}
+.rail{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding:14px 4px 26px;scrollbar-width:thin;scrollbar-color:var(--b) transparent}
+.cert{flex:0 0 min(470px,84vw);scroll-snap-align:start;cursor:pointer;transition:.35s}
+.cert:hover{transform:translateY(-10px) rotate(-1deg)}
+.frame{position:relative;aspect-ratio:1.45/1;border-radius:14px;overflow:hidden;background:#fff;border:3px solid rgba(255,255,255,.85);box-shadow:0 20px 45px -18px rgba(255,107,107,.55)}
+.frame img{width:100%;height:100%;object-fit:contain;display:block}
+.frame img.rot{position:absolute;top:50%;left:50%;width:68%;height:auto;transform:translate(-50%,-50%) rotate(-90deg)}
+.cert h3{font-size:1rem;margin-top:12px}.cert small{color:var(--mu)}
+.lb{position:fixed;inset:0;z-index:99;background:rgba(5,7,12,.92);display:none;place-items:center;padding:4vw}
+.lb.open{display:grid}.lb .frame{width:min(1000px,92vw);aspect-ratio:1.45/1}
+
+.rv{opacity:0;transform:translateY(24px);transition:.8s}.rv.on{opacity:1;transform:none}
+footer{color:var(--mu);font-size:.88rem;padding-bottom:30px}
+
+@media(max-width:900px){
+  body{grid-template-columns:1fr}
+  aside{position:relative;height:auto;border:0;align-items:flex-start}
+  aside nav{grid-auto-flow:column;overflow-x:auto;max-width:100%}.btn{margin-top:0}
+  .two{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="bg" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<aside>
+  <div class="pfp"><img src="pfp.png" alt="Justin Julian C. Nayosan"></div>
+  <div><h1>Justin Julian C. Nayosan</h1><div class="role">BSIT Student, Northeastern College</div></div>
+  <div class="mini">
+    <a href="mailto:justinnayosan@gmail.com">justinnayosan@gmail.com</a>
+    <a href="tel:+639538636991">0953 863 6991</a>
+    <span>Santiago City, Isabela</span>
+  </div>
+  <nav id="nav">
+    <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#certs">Certificates</a><a href="#exp">Experience</a>
+  </nav>
+  <a class="btn" href="resume.pdf" download="Justin-Nayosan-Resume.pdf">Download resume</a>
+</aside>
+
+<main>
+  <section class="hero rv" id="home" style="padding-top:6vh">
+    <p style="color:var(--a)">Hi, I'm Justin</p>
+    <h1>I turn what I learn into <span>working software.</span></h1>
+    <p>Information Technology student looking for an internship where I can apply what I've learned in school, gain practical experience, and keep developing my skills.</p>
+    <div class="chips"><em>PHP</em><em>MySQL</em><em>JavaScript</em><em>Flutter</em><em>C#</em><em>Troubleshooting</em></div>
+  </section>
+
+  <section id="about" class="rv">
+    <h2>About <b>me</b></h2>
+    <p class="sub">My background and what I'm aiming for.</p>
+    <div class="two">
+      <div class="card"><p>I'm a BS Information Technology student who enjoys computers, troubleshooting, and solving problems. I'm responsible, open to feedback, and always willing to learn and improve. I'm open to training and opportunities that help me grow professionally.</p></div>
+      <div class="card"><ul class="l"><li><b>College:</b> Northeastern College (BSIT)</li><li><b>High school:</b> Patul National High School</li><li><b>Elementary:</b> Saint James the Apostle</li></ul></div>
+    </div>
+  </section>
+
+  <section id="skills" class="rv">
+    <h2>Technical <b>skills</b></h2>
+    <p class="sub">What I can do right now.</p>
+    <div class="two">
+      <div class="card"><ul class="l"><li>Computer troubleshooting and basic technical support</li><li>HTML and CSS for webpage structure and styling</li><li>PHP fundamentals</li><li>MySQL fundamentals and database concepts</li></ul></div>
+      <div class="card"><b>Also learning</b><div class="chips"><em>C# basics</em><em>Flutter and Dart</em><em>Cisco Packet Tracer</em><em>Networking</em><em>Computer servicing</em></div></div>
+    </div>
+  </section>
+
+  <section id="projects" class="rv">
+    <h2>My <b>projects</b></h2>
+    <p class="sub">Things I built and what they do.</p>
+    <div class="proj">
+      <div class="card"><h3>Iayam Photo Studio System</h3><p>A management system for a photo studio with booking management, a customer database, equipment inventory tracking, and an admin dashboard for daily operations.</p><div class="chips"><em>PHP</em><em>MySQL Database</em><em>JavaScript</em></div></div>
+      <div class="card"><h3>Expense Tracker App</h3><p>A Flutter mobile app that helps users track daily expenses, with a clean UI, category sorting, and a chart that shows spending habits.</p><div class="chips"><em>Flutter</em><em>Dart</em></div></div>
+    </div>
+  </section>
+
+  <section id="certs" class="rv">
+    <h2>ProfDev <b>certificates</b></h2>
+    <p class="sub">Seminars, trainings and courses. Scroll sideways, filter by provider, and click one to enlarge it.</p>
+    <div class="tabs" id="tabs"></div>
+    <div class="arr"><button id="pv" aria-label="Previous">&larr;</button><button id="nx" aria-label="Next">&rarr;</button></div>
+    <div class="rail" id="rail"></div>
+  </section>
+
+  <section id="exp" class="rv">
+    <h2>Experience &amp; <b>qualifications</b></h2>
+    <p class="sub">Still building my experience, and open to learning.</p>
+    <div class="two">
+      <div class="card"><b>Work experience</b><p style="color:var(--mu);margin-top:8px">I'm at the start of my professional journey and open to training and internships that help me learn and develop.</p></div>
+      <div class="card"><ul class="l"><li>Willing to learn and improve my skills</li><li>Responsible and open to feedback</li><li>Interested in computers, troubleshooting, and solving problems</li></ul></div>
+    </div>
+  </section>
+
+  <footer>&copy; <span id="yr"></span> Justin Julian C. Nayosan &middot; justinnayosan@gmail.com &middot; 0953 863 6991</footer>
+</main>
+
+<div class="lb" id="lb"><div class="frame" id="lbf"></div></div>
+
+<script>
+/* Put all images inside a "certs" folder (pfp.png stays beside index.html) */
+const C = [
+ ["TESDA","Introduction to Computer Systems Servicing","Oct 19, 2026","1.jpg"],
+ ["TESDA","Installing and Configuring Computer Systems","Oct 19, 2026","2.jpg"],
+ ["TESDA","Setting Up Computer Servers","Oct 19, 2026","3.jpg"],
+ ["TESDA","Maintaining Computer Systems and Networks","Oct 19, 2026","4.jpg"],
+ ["TESDA","Setting Up Computer Networks","Oct 19, 2026","5.jpg"],
+ ["DICT","DICT Certificate of Participation: Game Development","2026","dict1.jpg"],
+ ["DICT","Cyber Tanaw: Emerging Cyber Threats and Technologies","2026","dict2.jpg"],
+ ["DICT","DICT Certificate of Completion","2026","dict3.jpg","rot"],
+ ["DICT","DICT Certificate of Participation: Cybersecurity","2026","dict4.jpg"],
+ ["Microsoft","Perform operations on arrays using helper methods in C#","Oct 7, 2026","m0.jpg"],
+ ["Microsoft","Challenge project: Develop branching and looping structures in C#","Oct 7, 2026","m1.jpg"],
+ ["Microsoft","Modify the content of strings using built-in methods in C#","Oct 23, 2026","m2.jpg"],
+ ["Microsoft","Convert data types using casting and conversion in C#","Oct 7, 2026","m3.jpg"],
+ ["Northeastern","ITWeek: Agentic AI","Aug 2026","nc1.jpg"],
+ ["Northeastern","ITWeek: Programming Fundamentals","Aug 2026","nc2.jpg"],
+ ["Northeastern","ITWeek: Integrating IoT in Capstone Project","Aug 2026","nc3.jpg"],
+ ["Cisco","Getting Started with Cisco Packet Tracer","2026","net1.jpg"],
+ ["Cisco","Exploring Internet of Things with Cisco Packet Tracer","2026","net2.jpg"]
+];
+const $=s=>document.querySelector(s);
+const img=c=>`<img src="certs/${c[3]}" alt="${c[1]}" class="${c[4]||""}" loading="lazy">`;
+const cats=["All",...new Set(C.map(c=>c[0]))];
+$("#tabs").innerHTML=cats.map((t,i)=>`<button class="${i?"":"on"}" data-t="${t}">${t}</button>`).join("");
+function draw(t){
+  const list=C.filter(c=>t==="All"||c[0]===t);
+  $("#rail").innerHTML=list.map(c=>`<div class="cert" tabindex="0" data-f="${c[3]}"><div class="frame">${img(c)}</div><h3>${c[1]}</h3><small>${c[0]} &middot; ${c[2]}</small></div>`).join("");
+  $("#rail").scrollLeft=0;
+}
+draw("All");
+$("#tabs").onclick=e=>{const b=e.target.closest("button");if(!b)return;document.querySelectorAll("#tabs button").forEach(x=>x.classList.remove("on"));b.classList.add("on");draw(b.dataset.t)};
+function open_(f){const c=C.find(x=>x[3]===f);$("#lbf").innerHTML=img(c);$("#lb").classList.add("open")}
+$("#rail").onclick=e=>{const c=e.target.closest(".cert");if(c)open_(c.dataset.f)};
+$("#rail").onkeydown=e=>{if(e.key==="Enter"){const c=e.target.closest(".cert");if(c)open_(c.dataset.f)}};
+$("#lb").onclick=()=>$("#lb").classList.remove("open");
+addEventListener("keydown",e=>{if(e.key==="Escape")$("#lb").classList.remove("open")});
+$("#pv").onclick=()=>$("#rail").scrollBy({left:-500,behavior:"smooth"});
+$("#nx").onclick=()=>$("#rail").scrollBy({left:500,behavior:"smooth"});
+
+$("#yr").textContent=new Date().getFullYear();
+addEventListener("mousemove",e=>{const s=$("#spot").style;s.setProperty("--x",e.clientX+"px");s.setProperty("--y",e.clientY+"px")});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("on");io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll(".rv").forEach(el=>io.observe(el));
+const links=[...document.querySelectorAll("#nav a")];
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle("on",a.hash==="#"+e.target.id))}),{rootMargin:"-40% 0px -55% 0px"});
+document.querySelectorAll("section").forEach(s=>so.observe(s));
+</script>
+</body>
+</html>
