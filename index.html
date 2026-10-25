@@ -13,26 +13,60 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--tx);line-
 a{color:inherit;text-decoration:none}
 :focus-visible{outline:2px solid var(--c);outline-offset:3px}
 
-/* animated background */
-.bg{position:fixed;inset:0;z-index:-2;overflow:hidden}
-.bg i{position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;animation:mv 20s ease-in-out infinite alternate}
+/* Clean Gradient Background */
+.bg{position:fixed;inset:0;z-index:-2;overflow:hidden;background:var(--bg)}
+.bg i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.25;animation:mv 20s ease-in-out infinite alternate}
 .bg i:nth-child(1){width:50vmax;height:50vmax;background:#ff6b6b;top:-20%;right:-10%}
-.bg i:nth-child(2){width:45vmax;height:45vmax;background:#ffb454;bottom:-25%;left:10%;animation-duration:27s;opacity:.22}
-.bg i:nth-child(3){width:35vmax;height:35vmax;background:#5eead4;top:30%;left:35%;animation-duration:33s;opacity:.14}
-.bg::after{content:"";position:absolute;inset:-64px;background-image:radial-gradient(rgba(255,255,255,.22) 1.2px,transparent 1.4px);background-size:32px 32px;animation:dots 14s linear infinite;-webkit-mask-image:radial-gradient(circle at 60% 20%,#000,transparent 75%);mask-image:radial-gradient(circle at 60% 20%,#000,transparent 75%)}
+.bg i:nth-child(2){width:45vmax;height:45vmax;background:#ffb454;bottom:-25%;left:10%;animation-duration:27s;opacity:.15}
+.bg i:nth-child(3){width:35vmax;height:35vmax;background:#5eead4;top:30%;left:35%;animation-duration:33s;opacity:.1}
 @keyframes mv{to{transform:translate(-8vmax,7vmax) scale(1.2)}}
-@keyframes dots{to{transform:translate(32px,32px)}}
-.spot{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(420px circle at var(--x,50%) var(--y,30%),rgba(255,180,84,.13),transparent 70%)}
+
+/* Spotlight effect on mouse */
+.spot{position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(420px circle at var(--x,50%) var(--y,30%),rgba(255,180,84,.1),transparent 70%)}
 
 /* sidebar */
-aside{position:sticky;top:0;height:100vh;padding:34px 26px;display:flex;flex-direction:column;gap:18px;border-right:1px solid var(--line);background:rgba(11,14,19,.55);backdrop-filter:blur(16px)}
-.pfp{width:150px;aspect-ratio:1;border-radius:34px;padding:4px;background:conic-gradient(from 0deg,var(--a),var(--b),var(--c),var(--a));animation:spin 9s linear infinite}
-.pfp img{width:100%;height:100%;object-fit:cover;border-radius:30px;display:block;animation:spin 9s linear infinite reverse}
-@keyframes spin{to{transform:rotate(360deg)}}
-aside h1{font-family:Syne,sans-serif;font-size:1.6rem;line-height:1.15}
-.role{color:var(--a);font-size:.95rem}
-.mini{font-size:.88rem;color:var(--mu);display:grid;gap:4px}.mini a:hover{color:var(--c)}
-aside nav{display:grid;gap:2px;margin-top:4px}
+aside{position:sticky;top:0;height:100vh;padding:34px 26px;display:flex;flex-direction:column;gap:18px;border-right:1px solid var(--line);background:rgba(11,14,19,.7);backdrop-filter:blur(16px);z-index:10}
+
+/* ================= NEW RETICLE PFP ================= */
+.pfp-container {
+  position: relative; width: 140px; height: 140px; margin: 0 auto 10px;
+  display: flex; justify-content: center; align-items: center;
+}
+
+/* Outer glowing ring */
+.pfp-ring-outer {
+  position: absolute; width: 100%; height: 100%;
+  border-radius: 50%; border: 1px solid var(--line);
+  border-top-color: var(--a); border-bottom-color: var(--b);
+  animation: spin 8s linear infinite;
+}
+
+/* Inner dashed ring */
+.pfp-ring-inner {
+  position: absolute; width: 85%; height: 85%;
+  border-radius: 50%; border: 1px dashed var(--c);
+  animation: spin-reverse 12s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
+
+/* The photo */
+.pfp-photo {
+  position: relative; width: 110px; height: 110px;
+  border-radius: 50%; overflow: hidden; z-index: 2;
+  border: 3px solid var(--bg); box-shadow: 0 0 20px rgba(255,107,107,.3);
+}
+
+.pfp-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+.pfp-container:hover .pfp-photo img { transform: scale(1.15); }
+/* ==================================================== */
+
+aside h1{font-family:Syne,sans-serif;font-size:1.5rem;line-height:1.15;text-align:center;}
+.role{color:var(--a);font-size:.95rem;text-align:center;}
+.mini{font-size:.88rem;color:var(--mu);display:grid;gap:4px;text-align:center;margin-top:10px;}.mini a:hover{color:var(--c)}
+aside nav{display:grid;gap:2px;margin-top:10px}
 aside nav a{padding:8px 12px;border-radius:10px;color:var(--mu);font-size:.95rem;transition:.2s}
 aside nav a:hover,aside nav a.on{background:var(--card);color:var(--tx);padding-left:18px}
 .btn{display:inline-block;text-align:center;padding:12px 20px;border-radius:12px;font-weight:700;background:var(--g);color:#1a0d05;margin-top:auto;transition:.25s}
@@ -78,8 +112,9 @@ footer{color:var(--mu);font-size:.88rem;padding-bottom:30px}
 
 @media(max-width:900px){
   body{grid-template-columns:1fr}
-  aside{position:relative;height:auto;border:0;align-items:flex-start}
-  aside nav{grid-auto-flow:column;overflow-x:auto;max-width:100%}.btn{margin-top:0}
+  aside{position:relative;height:auto;border:0;align-items:center;padding:30px;}
+  .pfp-container {margin: 0 auto;}
+  aside nav{grid-auto-flow:column;overflow-x:auto;max-width:100%;width:100%;justify-content:center;}.btn{margin-top:10px;width:100%;}
   .two{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
@@ -90,7 +125,15 @@ footer{color:var(--mu);font-size:.88rem;padding-bottom:30px}
 <div class="spot" id="spot" aria-hidden="true"></div>
 
 <aside>
-  <div class="pfp"><img src="pfp.png" alt="Justin Julian C. Nayosan"></div>
+  <!-- NEW PFP FRAME -->
+  <div class="pfp-container">
+    <div class="pfp-ring-outer"></div>
+    <div class="pfp-ring-inner"></div>
+    <div class="pfp-photo">
+      <img src="pfp.png" alt="Justin Julian C. Nayosan">
+    </div>
+  </div>
+  
   <div><h1>Justin Julian C. Nayosan</h1><div class="role">BSIT Student, Northeastern College</div></div>
   <div class="mini">
     <a href="mailto:justinnayosan@gmail.com">justinnayosan@gmail.com</a>
@@ -100,7 +143,7 @@ footer{color:var(--mu);font-size:.88rem;padding-bottom:30px}
   <nav id="nav">
     <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#certs">Certificates</a><a href="#exp">Experience</a>
   </nav>
-  <a class="btn" href="resume.pdf" download="Justin-Nayosan-Resume.pdf">Download resume</a>
+  <a class="btn" href="nayosan.pdf" download="Justin-Nayosan-Resume.pdf">Download resume</a>
 </aside>
 
 <main>
@@ -161,7 +204,7 @@ footer{color:var(--mu);font-size:.88rem;padding-bottom:30px}
 <div class="lb" id="lb"><div class="frame" id="lbf"></div></div>
 
 <script>
-/* Put all images inside a "certs" folder (pfp.png stays beside index.html) */
+/* All images are in the same folder as index.html */
 const C = [
  ["TESDA","Introduction to Computer Systems Servicing","Oct 19, 2026","1.jpg"],
  ["TESDA","Installing and Configuring Computer Systems","Oct 19, 2026","2.jpg"],
@@ -172,10 +215,10 @@ const C = [
  ["DICT","Cyber Tanaw: Emerging Cyber Threats and Technologies","2026","dict2.jpg"],
  ["DICT","DICT Certificate of Completion","2026","dict3.jpg","rot"],
  ["DICT","DICT Certificate of Participation: Cybersecurity","2026","dict4.jpg"],
- ["Microsoft","Perform operations on arrays using helper methods in C#","Oct 7, 2026","m0.jpg"],
- ["Microsoft","Challenge project: Develop branching and looping structures in C#","Oct 7, 2026","m1.jpg"],
- ["Microsoft","Modify the content of strings using built-in methods in C#","Oct 23, 2026","m2.jpg"],
- ["Microsoft","Convert data types using casting and conversion in C#","Oct 7, 2026","m3.jpg"],
+ ["Microsoft","Perform operations on arrays using helper methods in C#","Oct 7, 2026","m1.jpg"],
+ ["Microsoft","Challenge project: Develop branching and looping structures in C#","Oct 7, 2026","m2.jpg"],
+ ["Microsoft","Modify the content of strings using built-in methods in C#","Oct 23, 2026","m3.jpg"],
+ ["Microsoft","Convert data types using casting and conversion in C#","Oct 7, 2026","m4.jpg"],
  ["Northeastern","ITWeek: Agentic AI","Aug 2026","nc1.jpg"],
  ["Northeastern","ITWeek: Programming Fundamentals","Aug 2026","nc2.jpg"],
  ["Northeastern","ITWeek: Integrating IoT in Capstone Project","Aug 2026","nc3.jpg"],
@@ -183,7 +226,7 @@ const C = [
  ["Cisco","Exploring Internet of Things with Cisco Packet Tracer","2026","net2.jpg"]
 ];
 const $=s=>document.querySelector(s);
-const img=c=>`<img src="certs/${c[3]}" alt="${c[1]}" class="${c[4]||""}" loading="lazy">`;
+const img=c=>`<img src="${c[3]}" alt="${c[1]}" class="${c[4]||""}" loading="lazy">`;
 const cats=["All",...new Set(C.map(c=>c[0]))];
 $("#tabs").innerHTML=cats.map((t,i)=>`<button class="${i?"":"on"}" data-t="${t}">${t}</button>`).join("");
 function draw(t){
